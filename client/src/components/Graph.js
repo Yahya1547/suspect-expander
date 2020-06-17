@@ -1,7 +1,8 @@
 import React from 'react';
 import {InteractiveForceGraph, ForceGraphNode, ForceGraphLink} from 'react-vis-force';
+import {motion} from 'framer-motion';
 
-const Graph = ({data}) => {
+const Graph = ({data, search}) => {
     const buildNode = (data) => {
         var node = []
         node.push({
@@ -51,17 +52,22 @@ const Graph = ({data}) => {
         );
     })
     return ( 
-        <div className="graph">
+        <motion.div className="graph"
+            initial={{ opacity : 0}}
+            animate={{ opacity : 1}}
+            transition={{delay : 0.2, duration : 1.5}}
+        >
             <InteractiveForceGraph
                 zoom
                 simulationOptions={{ 
-                    height: 300, 
-                    width: 300,
+                    height: 500, 
+                    width: 500,
                     radiusMargin : 20,
+                    alpha : 1,
                 }}
                 labelAttr="label"
                 onSelectNode={(event, node) => console.log(node)}
-                onDeselectNode={(event, node) => console.log(node)}
+                onDeselectNode={(event, node) => search(node.id)}
                 highlightDependencies
             >
                 {nodeGraph}
@@ -70,7 +76,7 @@ const Graph = ({data}) => {
                 <ForceGraphNode node={{ id: 'second-node', label: 'Second node' }} fill="blue" />
                 <ForceGraphLink link={{ source: 'first-node', target: 'second-node' }} /> */}
             </InteractiveForceGraph>
-        </div>
+        </motion.div>
     );
 }
 

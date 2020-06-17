@@ -20,6 +20,7 @@ const Search = () => {
     const [init, setInit] = useState(true);
     const [data, setData] = useState({});
     const classes = useStyles();
+
     const searchId = async (id) => {
         const url = 'https://avatar.labpro.dev/friends/' + id;
         const dataUser = await fetch(url)
@@ -47,10 +48,11 @@ const Search = () => {
                 </Button>
             </form>
             <div>
-            Search
+            
             {init === true ? "" : 
                 data.status === 200 ? <Graph
                     data={data}
+                    search={searchId}
                 /> :
                 "ID Tidak Ditemukan"
             }
