@@ -51,11 +51,28 @@ const Graph = ({data, search}) => {
             <ForceGraphLink link={{ source : x.src, target : x.target }} />
         );
     })
+
+    const graphVariants = {
+        hidden : {
+            opacity : 0
+        },
+        visible : {
+            opacity : 1,
+            transition : {
+                delay : 0.2,
+                duration : 1.5
+            }
+        },
+        exit : {
+            opacity : 0
+        }
+    }
     return ( 
         <motion.div className="graph"
-            initial={{ opacity : 0}}
-            animate={{ opacity : 1}}
-            transition={{delay : 0.2, duration : 1.5}}
+            variants = {graphVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
         >
             <InteractiveForceGraph
                 zoom

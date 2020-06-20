@@ -3,6 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Graph from './Graph';
+import Card from '@material-ui/core/Card';
+import { AnimatePresence } from 'framer-motion';
 
 const useStyles = makeStyles((theme) => ({
         root: {
@@ -49,13 +51,18 @@ const Search = () => {
             </form>
             <div>
             
+            <AnimatePresence>
             {init === true ? "" : 
-                data.status === 200 ? <Graph
-                    data={data}
-                    search={searchId}
-                /> :
+                data.status === 200 ? 
+                <Card variant="outlined" style={styles.graph}>
+                    <Graph
+                        data={data}
+                        search={searchId}
+                    />
+                </Card> :
                 "ID Tidak Ditemukan"
             }
+            </AnimatePresence>
             </div>
         </div>
     );
@@ -69,6 +76,9 @@ const styles = {
         borderColor : 'black',
         borderStyle : 'solid',
         padding : 10,
+    },
+    graph : {
+        margin : 10,
     }
 }
 

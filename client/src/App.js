@@ -12,7 +12,7 @@ function App() {
     >
       <header className="App-header">
         <div>
-          Suspect Expander
+          <strong>Suspect Expander</strong>
         </div>
         <br/>
         <Search />
